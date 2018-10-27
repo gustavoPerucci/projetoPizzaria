@@ -1,0 +1,17 @@
+<h2>Lista Compras</h2>
+
+<ul>
+{% for compra in compras %}
+    <li> 
+        <a href="{% url 'core_compra_update' compra.id %}">{{ compra.produto_compra }}</a>
+    </li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'core_compra_novo' %}" method ='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Cadastrar</button>
+</form>

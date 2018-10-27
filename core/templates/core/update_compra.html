@@ -1,0 +1,11 @@
+<h2>Updating Compra: {{ compra }}</h2>
+
+<form action="{% url 'core_compra_update' compra.id %}" method="POST">
+        {% csrf_token%}
+
+        {{ form.as_p }}
+
+        <button type="submit">Salvar</button>
+</form>
+
+<a href="{% url 'core_compra_delete' compra.id %}">Deletar</a>

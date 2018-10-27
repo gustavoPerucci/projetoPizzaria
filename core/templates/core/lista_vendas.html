@@ -1,0 +1,17 @@
+<h2>Lista Vendas</h2>
+
+<ul>
+{% for venda in vendas %}
+    <li> 
+        <a href="{% url 'core_venda_update' venda.id %}">{{ venda.descricao}}</a>
+    </li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'core_venda_novo' %}" method ='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Cadastrar</button>
+</form>

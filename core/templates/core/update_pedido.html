@@ -1,0 +1,11 @@
+<h2>Updating Pedido: {{ pedido }}</h2>
+
+<form action="{% url 'core_pedido_update' pedido.id %}" method="POST">
+        {% csrf_token%}
+
+        {{ form.as_p }}
+
+        <button type="submit">Salvar</button>
+</form>
+
+<a href="{% url 'core_pedido_delete' pedido.id %}">Deletar</a>

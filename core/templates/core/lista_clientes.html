@@ -1,0 +1,17 @@
+<h2>Lista Clientes</h2>
+
+<ul>
+{% for cliente in clientes %}
+    <li> 
+        <a href="{% url 'core_cliente_update' cliente.id %}">{{ cliente.nome}}</a>
+    </li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'core_cliente_novo' %}" method ='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Cadastrar</button>
+</form>

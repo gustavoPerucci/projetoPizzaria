@@ -1,0 +1,17 @@
+<h2>Lista Produtos</h2>
+
+<ul>
+{% for produto in produtos %}
+    <li> 
+        <a href="{% url 'core_produto_update' produto.id %}">{{ produto.pizza_Sabor}}</a>
+    </li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'core_produto_novo' %}" method ='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Cadastrar</button>
+</form>

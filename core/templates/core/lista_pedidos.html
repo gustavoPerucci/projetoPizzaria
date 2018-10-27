@@ -1,0 +1,17 @@
+<h2>Lista Pedidos</h2>
+
+<ul>
+{% for pedido in pedidos %}
+    <li> 
+        <a href="{% url 'core_pedido_update' pedido.id %}">{{ pedido.cliente.nome}}</a>
+    </li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'core_pedido_novo' %}" method ='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Cadastrar</button>
+</form>

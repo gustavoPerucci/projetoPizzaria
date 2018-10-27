@@ -1,0 +1,17 @@
+<h2>Lista Fornecedores</h2>
+
+<ul>
+{% for fornecedor in fornecedores %}
+    <li> 
+        <a href="{% url 'core_fornecedor_update' fornecedor.id %}">{{ fornecedor.nome}}</a>
+    </li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'core_fornecedor_novo' %}" method ='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Cadastrar</button>
+</form>

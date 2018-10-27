@@ -1,0 +1,17 @@
+<h2>Lista Funcionarios</h2>
+
+<ul>
+{% for funcionario in funcionarios %}
+    <li> 
+        <a href="{% url 'core_funcionario_update' funcionario.id %}">{{ funcionario.nome}}</a>
+    </li>
+{% endfor %}
+</ul>
+
+<form action="{% url 'core_funcionario_novo' %}" method ='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Cadastrar</button>
+</form>

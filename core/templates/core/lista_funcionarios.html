@@ -1,17 +1,86 @@
-<h2>Lista Funcionarios</h2>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-<ul>
-{% for funcionario in funcionarios %}
-    <li> 
-        <a href="{% url 'core_funcionario_update' funcionario.id %}">{{ funcionario.nome}}</a>
-    </li>
-{% endfor %}
-</ul>
+{% block menu %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'core_home' %}">Início</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item active" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
+            <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
+            <a class="dropdown-item" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
+            <a class="dropdown-item" href="{% url 'core_lista_produtos' %}">Produtos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
+            <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contato</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link disabled" href="">Olá {{ user }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
 
-<form action="{% url 'core_funcionario_novo' %}" method ='POST'>
-    {% csrf_token %}
+{% block main%}
 
-    {{ form.as_p }}
+<div class="row">
+    <div class="col-sm-6">
+            <h1>Novo Cadastro</h1>
+        <form action="{% url 'core_funcionario_novo' %}" method ='POST'>
+            {% csrf_token %}
+        
+             {{ form|bootstrap }}
+        
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+<div class="col-sm-6">
+<h1>Lista de Funcionarios</h1>
+    <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Cargo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for funcionario in funcionarios%}
+                <tr>
+                <th scope="row">{{ funcionario.id }}</th>
+                <td>{{ funcionario.nome }}</td>
+                <td>{{ funcionario.endereco }}</td>
+                <td>{{ funcionario.telefone }}</td>
+                <td>{{ funcionario.cpf }}</td>
+                <td>{{ funcionario.cargo }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-    <button type="submit">Cadastrar</button>
-</form>
+{% endblock %}

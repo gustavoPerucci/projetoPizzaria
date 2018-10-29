@@ -1,7 +1,51 @@
-<h2>Tem certeza que deseja deletar: {{ obj }}</h2>
+{% extends 'base.html' %}
 
-<form method="POST">
-    {% csrf_token%}
-    <button type="sibmit">Deletar</button>
+{% block menu %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'core_home' %}">Início</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
+            <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
+            <a class="dropdown-item" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
+            <a class="dropdown-item" href="{% url 'core_lista_produtos' %}">Produtos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
+            <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contato</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link" href="#">Logout</a>
+              </li>
+    </ul>
+{% endblock %}
 
-</form>
+{% block main%}
+
+<div class="row">
+    <div class="col-12">
+        <h1>Tem certeza que deseja deletar: {{ obj }}</h1>
+    </div>
+</div>
+    
+<div class="row">
+    <div class="col-sm-6">
+        <form method="POST">
+            {% csrf_token%}
+            <button type="sibmit" class="btn btn-danger">Deletar</button>    
+        </form>
+    </div>
+</div>
+
+{% endblock %}

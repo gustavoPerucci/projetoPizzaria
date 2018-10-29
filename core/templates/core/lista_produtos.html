@@ -1,17 +1,84 @@
-<h2>Lista Produtos</h2>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-<ul>
-{% for produto in produtos %}
-    <li> 
-        <a href="{% url 'core_produto_update' produto.id %}">{{ produto.pizza_Sabor}}</a>
-    </li>
-{% endfor %}
-</ul>
+{% block menu %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'core_home' %}">Início</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
+            <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
+            <a class="dropdown-item" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
+            <a class="dropdown-item active" href="{% url 'core_lista_produtos' %}">Produtos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
+            <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contato</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link disabled" href="">Olá {{ user }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
 
-<form action="{% url 'core_produto_novo' %}" method ='POST'>
-    {% csrf_token %}
+{% block main%}
 
-    {{ form.as_p }}
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Novo Cadastro</h1>
+        <form action="{% url 'core_produto_novo' %}" method ='POST'>
+            {% csrf_token %}
+    
+            {{ form|bootstrap }}
+    
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+<div class="col-sm-6">        
+    <h1>Lista de Produtos</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Sabor Pizza</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Acrecimos</th>
+                <th scope="col">Valor</th>                
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                <tr>
+                <th scope="row">{{ produto.id }}</th>
+                <td>{{ produto.pizza_Sabor }}</td>
+                <td>{{ produto.descricao }}</td>
+                <td>{{ produto.acrecimos }}</td>
+                <td>{{ produto.valor }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-    <button type="submit">Cadastrar</button>
-</form>
+{% endblock %}

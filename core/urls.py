@@ -1,4 +1,5 @@
-from django.urls import include, path
+from django.conf.urls import url, include
+from django.urls import path
 from .views import (
     home,
     lista_clientes,
@@ -69,4 +70,6 @@ urlpatterns = [
     path('pedido-novo', pedido_novo, name='core_pedido_novo'),
     path('pedido-update(?P<id>\d+)/$', pedido_update, name='core_pedido_update'),
     path('pedido-delete/(?P<id>\d+)/$', pedido_delete, name='core_pedido_delete'),
+
+    
 ]

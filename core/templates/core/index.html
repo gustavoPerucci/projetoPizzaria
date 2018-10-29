@@ -1,1 +1,53 @@
-{{ mensagem }}
+{% extends 'base.html' %}
+
+{% block menu %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'core_home' %}">Início</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
+            <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
+            <a class="dropdown-item" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
+            <a class="dropdown-item" href="{% url 'core_lista_produtos' %}">Produtos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
+            <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contato</a>
+        </li>
+        
+       
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+              <a class="nav-link disabled" href="">Olá {{ user }}</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          {% endif %}
+    </ul>
+{% endblock %}
+
+{% block main%}
+
+<div class="row">
+    <div class="col">
+        <h1>Seja bem vindo ao sistema Pizzaria Delivery</h1>
+    </div>
+</div>
+
+{% endblock %}

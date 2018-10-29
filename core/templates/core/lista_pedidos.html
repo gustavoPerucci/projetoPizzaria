@@ -1,17 +1,86 @@
-<h2>Lista Pedidos</h2>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-<ul>
-{% for pedido in pedidos %}
-    <li> 
-        <a href="{% url 'core_pedido_update' pedido.id %}">{{ pedido.cliente.nome}}</a>
-    </li>
-{% endfor %}
-</ul>
+{% block menu %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'core_home' %}">Início</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
+            <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
+            <a class="dropdown-item" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
+            <a class="dropdown-item" href="{% url 'core_lista_produtos' %}">Produtos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
+            <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
+            <a class="dropdown-item active" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contato</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link disabled" href="">Olá {{ user }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
 
-<form action="{% url 'core_pedido_novo' %}" method ='POST'>
-    {% csrf_token %}
+{% block main%}
 
-    {{ form.as_p }}
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Novo Cadastro</h1>
+        <form action="{% url 'core_pedido_novo' %}" method ='POST'>
+            {% csrf_token %}
+    
+            {{ form|bootstrap }}
+    
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+<div class="col-sm-6">
+    <h1>Lista de Pedidos</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Item</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Data e Hora</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos %}
+                <tr>
+                <th scope="row">{{ pedido.id }}</th>
+                <td>{{ pedido.itens }}</td>
+                <td>{{ pedido.valor }}</td>
+                <td>{{ pedido.data_hora }}</td>
+                <td>{{ pedido.cliente }}</td>
+                <td>{{ pedido.pago }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-    <button type="submit">Cadastrar</button>
-</form>
+{% endblock %}

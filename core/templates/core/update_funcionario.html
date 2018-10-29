@@ -1,11 +1,55 @@
-<h2>Updating Funcionario: {{ funcionario }}</h2>
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block menu %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'core_home' %}">Início</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
+            <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
+            <a class="dropdown-item" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
+            <a class="dropdown-item" href="{% url 'core_lista_produtos' %}">Produtos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
+            <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contato</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+         </li>
+     </ul>
+{% endblock %}
 
-<form action="{% url 'core_funcionario_update' funcionario.id %}" method="POST">
-        {% csrf_token%}
+{% block main%}  
 
-        {{ form.as_p }}
+<div class="row">
+        <div class="col-12">
+                <h1>Atualizar dados do Funcionario: {{ funcionario }}</h1>
+        </div>
+</div>
 
-        <button type="submit">Salvar</button>
-</form>
+<div class="row">
+        <div class="col-sm-6">
+                <form action="{% url 'core_funcionario_update' funcionario.id %}" method="POST">
+                        {% csrf_token%}
+        
+                        {{ form|bootstrap }}
+        
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="{% url 'core_funcionario_delete' funcionario.id %}" class="btn btn-danger">Deletar</a>
+                </form>
+        </div>
+</div>
 
-<a href="{% url 'core_funcionario_delete' funcionario.id %}">Deletar</a>
+{% endblock %}

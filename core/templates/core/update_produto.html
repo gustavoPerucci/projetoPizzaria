@@ -1,11 +1,56 @@
-<h2>Updating Produto: {{ produto }}</h2>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-<form action="{% url 'core_produto_update' produto.id %}" method="POST">
-        {% csrf_token%}
+{% block menu %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'core_home' %}">Início</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
+            <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
+            <a class="dropdown-item" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
+            <a class="dropdown-item" href="{% url 'core_lista_produtos' %}">Produtos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
+            <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contato</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+         </li>
+     </ul>
+{% endblock %}
 
-        {{ form.as_p }}
+{% block main%} 
 
-        <button type="submit">Salvar</button>
-</form>
+<div class="row">
+        <div class="col-12">
+                <h1>Atualizar dados do Produto: {{ produto }}</h1>
+        </div>
+</div>
 
-<a href="{% url 'core_produto_delete' produto.id %}">Deletar</a>
+<div class="row">
+        <div class="col-sm-6">
+                <form action="{% url 'core_produto_update' produto.id %}" method="POST">
+                        {% csrf_token%}
+        
+                        {{ form|bootstrap }}
+        
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="{% url 'core_produto_delete' produto.id %}" class="btn btn-danger">Deletar</a>
+                </form>
+        </div>
+</div>
+
+{% endblock %}

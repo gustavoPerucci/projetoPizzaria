@@ -72,7 +72,7 @@
                 {% for fornecedor in fornecedores%}
                 <tr>
                 <th scope="row">{{ fornecedor.id }}</th>
-                <td>{{ fornecedor.nome }}</td>
+                <td><a href="{% url 'core_fornecedor_update' fornecedor.id %}">{{ fornecedor.nome }}</a></td>
                 <td>{{ fornecedor.endereco }}</td>
                 <td>{{ fornecedor.telefone }}</td>
                 <td>{{ fornecedor.cnpj }}</td>

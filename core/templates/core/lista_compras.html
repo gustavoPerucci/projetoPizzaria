@@ -72,7 +72,7 @@
                 {% for compra in compras%}
                 <tr>
                 <th scope="row">{{ compra.id }}</th>
-                <td>{{ compra.dataCompra }}</td>
+                <td><a href="{% url 'core_compra_update' compra.id %}">{{ compra.dataCompra }}</a></td>
                 <td>{{ compra.fornecedor }}</td>
                 <td>{{ compra.produto_compra }}</td>
                 <td>{{ compra.valorCompra }}</td>

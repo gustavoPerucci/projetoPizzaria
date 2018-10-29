@@ -71,11 +71,15 @@
                 {% for pedido in pedidos %}
                 <tr>
                 <th scope="row">{{ pedido.id }}</th>
-                <td>{{ pedido.itens }}</td>
+                <td><a href="{% url 'core_pedido_update' pedido.id %}">{{ pedido.itens }}</a></td>
                 <td>{{ pedido.valor }}</td>
                 <td>{{ pedido.data_hora }}</td>
                 <td>{{ pedido.cliente }}</td>
-                <td>{{ pedido.pago }}</td>
+                {% if pedido.pago %}
+                <td>Pago</td>    
+                {% else %}
+                <td>Não pago</td>
+                {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

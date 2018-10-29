@@ -71,7 +71,7 @@
                 {% for funcionario in funcionarios%}
                 <tr>
                 <th scope="row">{{ funcionario.id }}</th>
-                <td>{{ funcionario.nome }}</td>
+                <td><a href="{% url 'core_funcionario_update' funcionario.id %}">{{ funcionario.nome }}</a></td>
                 <td>{{ funcionario.endereco }}</td>
                 <td>{{ funcionario.telefone }}</td>
                 <td>{{ funcionario.cpf }}</td>

@@ -71,7 +71,7 @@
                 {% for venda in vendas %}
                 <tr>
                 <th scope="row">{{ venda.id }}</th>
-                <td>{{ venda.descricao }}</td>
+                <td><a href="{% url 'core_venda_update' venda.id %}">{{ venda.descricao }}</a></td>
                 <td>{{ venda.dataVenda }}</td>
                 <td>{{ venda.valor }}</td>
                 <td>{{ venda.totalVendas }}</td>

@@ -70,7 +70,7 @@
                 {% for produto in produtos %}
                 <tr>
                 <th scope="row">{{ produto.id }}</th>
-                <td>{{ produto.pizza_Sabor }}</td>
+                <td><a href="{% url 'core_produto_update' produto.id %}">{{ produto.pizza_Sabor }}</a></td>
                 <td>{{ produto.descricao }}</td>
                 <td>{{ produto.acrecimos }}</td>
                 <td>{{ produto.valor }}</td>

@@ -17,7 +17,7 @@ class movProdutoAdmin(admin.ModelAdmin):
     list_display = (
         'pizza_Sabor',
         'descricao',
-        'acrescimo',
+        'acrecimo',
         'valor',
     )
 

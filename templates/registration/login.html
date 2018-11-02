@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block main %}
-
+<h1>Seja bem vindo, Pizzaria Delivery</h1>
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Usuário ou senha incorretos. Tente novamente!</p>
 {% endif %}
 
 {% if next %}
@@ -11,7 +11,7 @@
     <p>Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
     {% else %}
-    <p>Please login to see this page.</p>
+    <p>Por favor faça login para acessar o sistema</p>
     {% endif %}
 {% endif %}
 

@@ -317,3 +317,5 @@ def pedido_delete(request, id):
         return redirect('core_lista_pedidos')
     else:
         return render (request, 'core/delete_confirm.html', {'obj': pedido})
+
+

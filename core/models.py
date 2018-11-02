@@ -34,12 +34,13 @@ class Fornecedor(models.Model):
 class Produto(models.Model):
     pizza_Sabor = models.CharField(max_length=100)    
     descricao = models.CharField(max_length=200)
-    acrecimos = models.CharField(max_length=100)
+    codigo_pizza = models.DecimalField(max_digits=5, decimal_places=2)
     valor = models.DecimalField(max_digits=5, decimal_places=2)
     
 
     def __str__(self):
         return self.pizza_Sabor
+
 
 class Compra(models.Model):
     dataCompra = models.DateField(auto_now = False , auto_now_add = False)
@@ -70,3 +71,4 @@ class Pedido(models.Model):
 
     def __str__(self):
         return self.cliente.nome
+

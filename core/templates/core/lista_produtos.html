@@ -62,7 +62,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Sabor Pizza</th>
                 <th scope="col">Descrição</th>
-                <th scope="col">Acrecimo</th>
+                <th scope="col">Acrecimos</th>
                 <th scope="col">Valor</th>                
                 </tr>
             </thead>
@@ -72,7 +72,7 @@
                 <th scope="row">{{ produto.id }}</th>
                 <td><a href="{% url 'core_produto_update' produto.id %}">{{ produto.pizza_Sabor }}</a></td>
                 <td>{{ produto.descricao }}</td>
-                <td>{{ produto.acrecimo }}</td>
+                <td>{{ produto.acrecimos }}</td>
                 <td>{{ produto.valor }}</td>
                 </tr>
                 {% endfor %}

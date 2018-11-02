@@ -34,9 +34,7 @@ class Fornecedor(models.Model):
 class Produto(models.Model):
     pizza_Sabor = models.CharField(max_length=100)    
     descricao = models.CharField(max_length=200)
-    acrecimos = models.CharField(max_length=100)
-    valor = models.DecimalField(max_digits=5, decimal_places=2)
-    
+    valor = models.DecimalField(max_digits=5, decimal_places=2)    
 
     def __str__(self):
         return self.pizza_Sabor

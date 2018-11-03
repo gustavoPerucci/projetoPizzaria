@@ -1,9 +1,9 @@
 from django.conf.urls import url, include
-from django.urls import path
+from django.urls import path, re_path
 from .views import (
     home,
 )
 
 urlpatterns = [
-    path('', home, name='website_home'),
+    re_path(r'^$', home, name='website_home'),
 ]

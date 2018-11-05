@@ -15,10 +15,8 @@
             <a class="dropdown-item active" href="{% url 'core_lista_produtos' %}">Produtos</a>
             <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
             <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_item_pedido' %}">Item Pedido</a>
             <a class="dropdown-item" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Menu</a>
@@ -62,6 +60,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Sabor Pizza</th>
                 <th scope="col">Descrição</th>
+                <th scope="col">Codigo pizza</th>
                 <th scope="col">Valor</th>                
                 </tr>
             </thead>
@@ -71,6 +70,7 @@
                 <th scope="row">{{ produto.id }}</th>
                 <td><a href="{% url 'core_produto_update' produto.id %}">{{ produto.pizza_Sabor }}</a></td>
                 <td>{{ produto.descricao }}</td>
+                <td>{{ produto.codigo_pizza }}</td>
                 <td>{{ produto.valor }}</td>
                 </tr>
                 {% endfor %}

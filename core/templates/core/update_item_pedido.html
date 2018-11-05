@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
 {% block menu %}
     <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" href="{% url 'core_home' %}">Início</a>
+          <a class="nav-link" href="{% url 'core_home' %}">Início</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
             <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
@@ -23,29 +24,29 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contato</a>
         </li>
-        
-       
-          {% if user.is_authenticated %}
-          <li class="nav-item">
-              <a class="nav-link disabled" href="">Olá {{ user }}</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
-          </li>
-          {% endif %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+         </li>
     </ul>
 {% endblock %}
 
 {% block main%}
 
 <div class="row">
-    <div class="col">
-        <h1>Seja bem vindo ao sistema Pizzaria Delivery</h1>
-    </div>
+        <div class="col-12">
+                <h1>Atualizar dados do item pedido: {{ item_pedido }}</h1>
+        </div>
 </div>
 
+<div class="col-sm-6">
+        <form action="{% url 'core_item_pedido_update' item_pedido.id %}" method="POST">
+                {% csrf_token%}
+
+                {{ form|bootstrap }}
+
+                <button type="submit" class="btn btn-primary" class="btn btn-primary">Salvar</button>
+                <a href ="{% url 'core_item_pedido_delete' item_pedido.id %}" class="btn btn-danger">Deletar</a>
+        </form>
+</div>        
+        
 {% endblock %}

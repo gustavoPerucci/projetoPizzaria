@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h1>Seja bem vindo, Pizzaria Delivery</h1>
+<h1>Seja bem vindo ao sistema de gerenciamento, Pizzaria Delivery</h1>
 {% if form.errors %}
 <p>Usuário ou senha incorretos. Tente novamente!</p>
 {% endif %}
 
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+    <p>Sua conta não tem acesso a esta página. Para prosseguir,
+        por favor faça o login com uma conta que tenha acesso.</p>
     {% else %}
     <p>Por favor faça login para acessar o sistema</p>
     {% endif %}
@@ -33,6 +33,6 @@
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<p><a href="{% url 'password_reset' %}">Esqueceu a senha? Clique aqui!</a></p>
 
 {% endblock %}

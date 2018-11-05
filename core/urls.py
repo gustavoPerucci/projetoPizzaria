@@ -30,6 +30,10 @@ from .views import (
     compra_delete,
     venda_delete,
     pedido_delete,
+    lista_item_pedido,
+    item_pedido_novo,
+    item_pedido_update,
+    item_pedido_delete,
 )
 
 urlpatterns = [
@@ -66,10 +70,14 @@ urlpatterns = [
     re_path(r'^venda-update(?P<id>\d+)/$', venda_update, name='core_venda_update'),
     re_path(r'^venda-delete/(?P<id>\d+)/$', venda_delete, name='core_venda_delete'),
 
+    re_path(r'^item-pedido$', lista_item_pedido, name='core_lista_item_pedido'),
+    re_path(r'^item-pedido-novo$', item_pedido_novo, name='core_item_pedido_novo'),
+    re_path(r'^item-pedido-update(?P<id>\d+)/$', item_pedido_update, name='core_item_pedido_update'),
+    re_path(r'^item-pedido-delete/(?P<id>\d+)/$', item_pedido_delete, name='core_item_pedido_delete'),
+
     re_path(r'^pedidos$', lista_pedidos, name='core_lista_pedidos'),
     re_path(r'^pedido-novo$', pedido_novo, name='core_pedido_novo'),
     re_path(r'^pedido-update(?P<id>\d+)/$', pedido_update, name='core_pedido_update'),
     re_path(r'^pedido-delete/(?P<id>\d+)/$', pedido_delete, name='core_pedido_delete'),
-
     
 ]

@@ -34,7 +34,8 @@ class Fornecedor(models.Model):
 class Produto(models.Model):
     pizza_Sabor = models.CharField(max_length=100)    
     descricao = models.CharField(max_length=200)
-    valor = models.DecimalField(max_digits=5, decimal_places=2)    
+    codigo_pizza = models.CharField(max_length=200)
+    valor = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
         return self.pizza_Sabor
@@ -56,16 +57,28 @@ class Venda(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.descricao
+        return self.descricao + ' - ' + self.cliente.nome
+
+class Item_pedido(models.Model):
+    quantidade = models.DecimalField(max_digits=5, decimal_places=2)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.produto.pizza_Sabor + ' - ' + self.cliente.nome
+
 
 class Pedido(models.Model):
-    
-    itens = models.TextField()
-    valor = models.DecimalField(max_digits=5, decimal_places=2)
+    item_pedido = models.ForeignKey(Item_pedido, on_delete=models.CASCADE)
+    funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
     data_hora = models.DateTimeField(auto_now = False , auto_now_add = False)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     pago = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return self.cliente.nome
 
+    def totalPedido(self):
+        return ( self.item_pedido.quantidade * self.produto.valor)

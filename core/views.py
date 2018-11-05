@@ -8,6 +8,7 @@ from .models import (
     Compra,
     Venda,
     Pedido,
+    Item_pedido,
 )
 
 from .forms import (
@@ -18,7 +19,9 @@ from .forms import (
     CompraForm,
     VendaForm,
     PedidoForm,
+    Item_pedidoForm,
 )
+
 @login_required()
 def home(request):
     context = {'mensagem': 'Olá mundo'}
@@ -318,4 +321,41 @@ def pedido_delete(request, id):
     else:
         return render (request, 'core/delete_confirm.html', {'obj': pedido})
 
+@login_required()
+def lista_item_pedido(request):
+    form = Item_pedidoForm()
+    item_pedido = Item_pedido.objects.all()
+    data = {'item_pedidos': item_pedido, 'form': form}
+    return render(request, 'core/lista_item_pedido.html', data)
 
+@login_required()
+def item_pedido_novo(request):
+    form = Item_pedidoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_item_pedido')
+
+@login_required()
+def item_pedido_update(request, id):
+    data = {}
+    item_pedido = Item_pedido.objects.get(id=id)
+    form = Item_pedidoForm(request.POST or None, instance = item_pedido)
+    data['item_pedido'] = item_pedido
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect ('core_lista_item_pedido')
+    else:
+        return render(request, 'core/update_item_pedido.html', data)
+
+
+@login_required()
+def item_pedido_delete(request, id):
+    item_pedido = Item_pedido.objects.get(id=id)
+    if request.method == 'POST':
+        item_pedido.delete()
+        return redirect('core_lista_item_pedido')
+    else:
+        return render (request, 'core/delete_confirm.html', {'obj': item_pedido})

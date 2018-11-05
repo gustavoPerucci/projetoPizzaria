@@ -11,11 +11,11 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{% url 'core_lista_funcionarios' %}">Funcionarios</a>
             <a class="dropdown-item" href="{% url 'core_lista_clientes'%} ">Clientes</a>
-            <a class="dropdown-item active" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
+            <a class="dropdown-item" href="{% url 'core_lista_fornecedores' %}">Fornecedores</a>
             <a class="dropdown-item" href="{% url 'core_lista_produtos' %}">Produtos</a>
             <a class="dropdown-item" href="{% url 'core_lista_compras' %}">Compras</a>
             <a class="dropdown-item" href="{% url 'core_lista_vendas' %}">Vendas</a>
-            <a class="dropdown-item" href="{% url 'core_lista_item_pedido' %}">Item Pedido</a>
+            <a class="dropdown-item active" href="{% url 'core_lista_item_pedido' %}">Item Pedido</a>
             <a class="dropdown-item" href="{% url 'core_lista_pedidos' %}">Pedidos</a>
         </li>
         <li class="nav-item">
@@ -45,40 +45,38 @@
     <div class="col-sm-6">
         <h1>Novo Cadastro</h1>
 
-        <form action="{% url 'core_fornecedor_novo' %}" method ='POST'>
+        <form action="{% url 'core_item_pedido_novo' %}" method ='POST'>
             {% csrf_token %}
-
+    
             {{ form|bootstrap }}
-
+    
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
     </div>
-    
-<div class="col-sm-6">
-<h1>Lista de Fornecedores</h1>
-    <table class="table">
+    <div class="col-sm-6">
+        <h1>Lista Item Pedido</h1>
+
+        <table class="table">
             <thead class="thead-dark">
                 <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Endereço</th>
-                <th scope="col">Telefone</th>
-                <th scope="col">CNPJ</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Cliente</th>
                 </tr>
             </thead>
             <tbody>
-                {% for fornecedor in fornecedores%}
-                <tr>
-                <th scope="row">{{ fornecedor.id }}</th>
-                <td><a href="{% url 'core_fornecedor_update' fornecedor.id %}">{{ fornecedor.nome }}</a></td>
-                <td>{{ fornecedor.endereco }}</td>
-                <td>{{ fornecedor.telefone }}</td>
-                <td>{{ fornecedor.cnpj }}</td>
+                {%for item_pedido in item_pedidos%}
+                <tr>              
+                <th scope="row" >{{ item_pedido.id }}</th>                
+                <td><a href="{% url 'core_item_pedido_update' item_pedido.id %}">{{ item_pedido.quantidade }}</a></td>
+                <td>{{ item_pedido.produto.pizza_Sabor }}</td>
+                <td>{{ item_pedido.cliente.nome }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </div>
+     </div>
 </div>
 
 {% endblock %}

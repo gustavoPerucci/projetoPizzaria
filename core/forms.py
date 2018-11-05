@@ -7,6 +7,7 @@ from .models import (
     Compra,
     Venda,
     Pedido,
+    Item_pedido,
 )
 
 class FuncionarioForm(ModelForm):
@@ -41,4 +42,9 @@ class VendaForm(ModelForm):
 class PedidoForm(ModelForm):
     class Meta:
         model = Pedido
+        fields = '__all__'
+
+class Item_pedidoForm(ModelForm):
+    class Meta:
+        model = Item_pedido
         fields = '__all__'

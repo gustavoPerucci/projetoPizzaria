@@ -35,7 +35,7 @@ class Produto(models.Model):
     pizza_Sabor = models.CharField(max_length=100)    
     descricao = models.CharField(max_length=200)
     codigo_pizza = models.CharField(max_length=200)
-    valor = models.DecimalField(max_digits=7, decimal_places=2)
+    valor = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
         return self.pizza_Sabor
@@ -60,7 +60,7 @@ class Venda(models.Model):
         return self.descricao + ' - ' + self.cliente.nome
 
 class Item_pedido(models.Model):
-    quantidade = models.DecimalField(max_digits=7, decimal_places=2)
+    quantidade = models.DecimalField(max_digits=5, decimal_places=2)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
 

@@ -81,4 +81,4 @@ class Pedido(models.Model):
         return self.cliente.nome
 
     def totalPedido(self):
-        return math.ceil(self.item_pedido.quantidade * self.produto.valor)
+        return (self.item_pedido.quantidade * self.produto.valor)

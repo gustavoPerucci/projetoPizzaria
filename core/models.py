@@ -67,7 +67,6 @@ class Item_pedido(models.Model):
     def __str__(self):
         return self.produto.pizza_Sabor + ' - ' + self.cliente.nome
 
-
 class Pedido(models.Model):
     item_pedido = models.ForeignKey(Item_pedido, on_delete=models.CASCADE)
     funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
@@ -76,9 +75,10 @@ class Pedido(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     pago = models.BooleanField(default=False)
     
-
     def __str__(self):
         return self.cliente.nome
 
     def totalPedido(self):
         return (self.item_pedido.quantidade * self.produto.valor)
+
+    

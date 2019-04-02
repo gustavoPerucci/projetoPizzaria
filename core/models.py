@@ -82,3 +82,5 @@ class Pedido(models.Model):
         return (self.item_pedido.quantidade * self.produto.valor)
 
     
+
+    
